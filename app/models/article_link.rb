@@ -2,4 +2,10 @@ class ArticleLink < ActiveRecord::Base
     scope :recent_reverse, lambda { order("created_at DESC").limit(10).reverse }
     
     validates_presence_of :url
+    validates_presence_of :title
+    
+    belongs_to :user
+    
+    # Set up this side of the polymorphic association
+    has_many :likes, as: :likeable
 end

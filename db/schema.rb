@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160203015652) do
+ActiveRecord::Schema.define(version: 20160209020536) do
 
   create_table "article_links", force: true do |t|
     t.string   "title"
@@ -37,10 +37,21 @@ ActiveRecord::Schema.define(version: 20160203015652) do
     t.integer  "user_id"
   end
 
-  create_table "text_posts", force: true do |t|
-    t.text     "post"
+  create_table "likes", force: true do |t|
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "likeable_type"
+    t.integer  "likeable_id"
+  end
+
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id"
+
+  create_table "text_posts", force: true do |t|
+    t.text     "textpost"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
   end
 
   create_table "tweets", force: true do |t|

@@ -1,0 +1,19 @@
+
+  
+  <% @text_posts.each do |text_post| %>
+  <h4><%= text_post.title %></h4>
+  <%= image_tag text_post.textpost.slice(0..30) %> ...
+  <br>
+  <%= link_to "Show", text_post_path(text_post) %>
+  <br>
+  <span class='likes pull-left'> <%= text_post.likes.count %> likes </span>
+  
+  <%= form_for Like.new do |f| %>
+    <%= f.hidden_field :likeable_type, :value => text_post.class %>
+    <%= f.hidden_field :likeable_id, :value => text_post.id %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.submit "Like" %>
+  <% end %>
+  
+  
+<% end %>
